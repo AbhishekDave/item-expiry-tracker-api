@@ -5,13 +5,20 @@ from flask_jwt_extended import jwt_required
 from sqlalchemy.exc import SQLAlchemyError
 
 from src.configs.development_config import db
-from src.utils.error_handling_utility.exceptions import InternalServerException
+
+from src.decorators.unified_decorators.validate_request_data import validate_request_data
 from src.decorators.unified_decorators.validate_request import validate_request, g
 
-from src.schemas.grocery_schemas.grocery_name_schema import GroceryNameSchema
+from src.schemas.grocery_schemas.grocery_list_name_schema import GroceryListNameSchema
+from src.schemas.grocery_schemas.product_schema import ProductSchema
+from src.schemas.grocery_schemas.store_schema import StoreSchema
+from src.schemas.mapping_schemas.store_product_mapping_schema import StoreProductMappingSchema
+
+from src.utils.error_handling_utility.exceptions import InternalServerException
 
 from src.services.user_services import UserService
 from src.services.grocery_services import GroceryService
+
 from src.services.serialization_services.grocery_serialization_service import GrocerySerializationService
 
 grocery_name_post_api_bp = Blueprint('grocery_name_post_api', __name__)
@@ -19,7 +26,7 @@ grocery_name_post_api_bp = Blueprint('grocery_name_post_api', __name__)
 
 @grocery_name_post_api_bp.route('/grocery-name', methods=['POST'])
 @jwt_required()
-@validate_request('POST', schema_class=GroceryNameSchema)
+@validate_request('POST', schema_class=GroceryListNameSchema)
 def add_grocery_name(**kwargs):
     # Log the incoming request URL
     api_url = request.url
@@ -55,3 +62,12 @@ def add_grocery_name(**kwargs):
         raise InternalServerException('Database error occurred')
 
     return jsonify(message="Grocery Name added successfully", grocery_name_data=grocery_data_dump), 201
+
+
+@grocery_name_post_api_bp.route('/grocery-list-name/items', methods=['POST'])
+@validate_request_data('POST', schema_dict={'grocery-list-name': GroceryListNameSchema, 'product': ProductSchema, 'store': StoreSchema, 'store-product-mapping': StoreProductMappingSchema})
+@jwt_required()
+def add_grocery_list_name_with_items():
+    request_data = g.validated_data
+    api_url = request.url
+    current_app.logger.info(f"\nRequest URL: {api_url}")

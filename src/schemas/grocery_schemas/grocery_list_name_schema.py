@@ -1,12 +1,12 @@
-# src/schemas/grocery_schemas/grocery_name_schema.py
+# src/schemas/grocery_schemas/grocery_list_name_schema.py
 
 from marshmallow import Schema, fields, validate
-from src.models.grocery_models.grocery_name_model import GroceryName
+from src.models.grocery_models.grocery_list_name_model import GroceryListName
 
 
-class GroceryNameSchema(Schema):
+class GroceryListNameSchema(Schema):
     class Meta:
-        model = GroceryName
+        model = GroceryListName
 
     id = fields.Integer(dump_only=True)     # Provided in output (e.g., responses)
     name = fields.String(required=True, validate=validate.Length(min=2, max=80))    # Provided in both Input and output (e.g., responses)

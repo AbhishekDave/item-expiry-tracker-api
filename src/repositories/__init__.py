@@ -4,4 +4,4 @@
 from .user_repository import UserRepository
 
 # grocery_repository
-from .grocery_repository import GroceryRepository
+from .grocery_list_name_repository import GroceryListNameRepository

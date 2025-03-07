@@ -1,12 +1,12 @@
-# src/models/grocery_models/grocery_name_model.py
+# src/models/grocery_models/grocery_list_name_model.py
 
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from src.configs.development_config import db
 
 
-class GroceryName(db.Model):
-    __tablename__ = 'grocery_name'
+class GroceryListName(db.Model):
+    __tablename__ = 'grocery_list_name'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False, index=True)    # ABC List, GYM List, etc
     grocery_type = db.Column(db.String(80), nullable=False, index=True)    # Weekly, Monthly, Daily, etc

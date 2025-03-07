@@ -39,7 +39,7 @@ class UserSchema(Schema):
 
     modified_at = fields.DateTime(dump_only=True)  # Provided in output
 
-    user_groceries = fields.List(fields.Nested('GroceryNameSchema', only=("id", "name", "grocery_type")), dump_only=True)                # type: ignore
+    user_groceries = fields.List(fields.Nested('GroceryListNameSchema', only=("id", "name", "grocery_type")), dump_only=True)                # type: ignore
 
     @validates('username')
     def validate_username(self, value):

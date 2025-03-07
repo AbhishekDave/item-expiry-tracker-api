@@ -21,7 +21,7 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now(ZoneInfo('UTC')))
     modified_at = db.Column(db.DateTime, default=datetime.now(ZoneInfo('UTC')), onupdate=datetime.now(ZoneInfo('UTC')))
 
-    user_groceries = db.relationship('GroceryName', backref=db.backref('user', lazy='joined'))
+    user_groceries = db.relationship('GroceryListName', backref=db.backref('user', lazy='joined'))
 
     def set_password(self, password):
         self.password = generate_password_hash(password)

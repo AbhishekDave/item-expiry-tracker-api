@@ -1,6 +1,6 @@
 # src/services/serialization_services/grocery_serialization.py
 
-from src.schemas.grocery_schemas.grocery_name_schema import GroceryNameSchema
+from src.schemas.grocery_schemas.grocery_list_name_schema import GroceryListNameSchema
 
 
 class GrocerySerializationService:
@@ -10,13 +10,13 @@ class GrocerySerializationService:
 
     @staticmethod
     def _get_grocery_name_schema():
-        from src.schemas.grocery_schemas.grocery_name_schema import GroceryNameSchema
-        return GroceryNameSchema()
+        from src.schemas.grocery_schemas.grocery_list_name_schema import GroceryListNameSchema
+        return GroceryListNameSchema()
 
     @staticmethod
     def _get_grocery_names_schema():
-        from src.schemas.grocery_schemas.grocery_name_schema import GroceryNameSchema
-        return GroceryNameSchema(many=True)
+        from src.schemas.grocery_schemas.grocery_list_name_schema import GroceryListNameSchema
+        return GroceryListNameSchema(many=True)
 
     def serialize_grocery_names(self, grocery_name_list, fields=None):
         if isinstance(grocery_name_list, list):
@@ -24,5 +24,5 @@ class GrocerySerializationService:
         else:
             schema = self._get_grocery_name_schema()
         if fields:
-            schema = GroceryNameSchema(many=True, exclude=fields)
+            schema = GroceryListNameSchema(many=True, exclude=fields)
         return schema.dump(grocery_name_list)

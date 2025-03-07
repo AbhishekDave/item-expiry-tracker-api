@@ -15,10 +15,7 @@ class StoreProductMapping(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False, index=True)
     price = db.Column(db.Float, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
+    unit = db.Column(db.String, nullable=False)
     expiry_date = db.Column(db.Date, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now(ZoneInfo('UTC')))
     modified_at = db.Column(db.DateTime, default=datetime.now(ZoneInfo('UTC')), onupdate=datetime.now(ZoneInfo('UTC')))
-
-    __table_args__ = (
-        Index('ix_store_product', 'store_id', 'product_id'),  # Composite index
-    )

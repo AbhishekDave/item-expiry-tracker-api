@@ -6,7 +6,7 @@ from .auth_schemas.user_login_schema import UserLoginSchema
 from .auth_schemas.user_registration_schema import UserRegistrationSchema
 
 # grocery schemas
-from .grocery_schemas.grocery_name_schema import GroceryNameSchema
+from .grocery_schemas.grocery_list_name_schema import GroceryListNameSchema
 from .grocery_schemas.grocery_item_schema import GroceryItemSchema
 from .grocery_schemas.store_schema import StoreSchema
 from .grocery_schemas.product_schema import ProductSchema

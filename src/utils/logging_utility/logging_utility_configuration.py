@@ -1,4 +1,4 @@
-# src/utils/configure_logging.py
+# src/utils/logging_utility_configuration.py
 
 import logging
 from logging.handlers import RotatingFileHandler
@@ -16,7 +16,7 @@ class JsonFormatter(logging.Formatter):
         return json.dumps(log_record)
 
 
-def configure_logging(app):
+def logging_utility_configuration(app):
     """
     Configures logging for the Flask application.
 

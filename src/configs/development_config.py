@@ -13,7 +13,7 @@ from src.configs.development_configs import database_config, jwt_config, redis_c
 from src.configs.development_configs.cors_config import CORSConfig
 from src.utils.error_handling_utility import common_error_handlers
 
-from src.utils.logging_utility.configure_logging import configure_logging
+from src.utils.logging_utility.logging_utility_configuration import logging_utility_configuration
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -52,7 +52,7 @@ def create_app():
     jwt.init_app(app)
 
     # Configure Logging
-    configure_logging(app)
+    logging_utility_configuration(app)
 
     # CORS configuration
     CORS(app, resources={r"/*": {"origins": [f"{cors_config.CORSConfig.CORS_FRONTEND_URL_DEV_ENV}"]}})
